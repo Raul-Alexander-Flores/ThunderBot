@@ -1,0 +1,1 @@
+npm i @discordjs/rest 
