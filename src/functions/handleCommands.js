@@ -7,7 +7,6 @@ const clientId = '1047610035469045831';
 const guildId = '893188928184676352'; 
 
 
-
 const rest = new REST({
     version: '9'
 }).setToken(process.env.DISCORD_TOKEN);

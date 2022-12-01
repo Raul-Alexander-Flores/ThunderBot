@@ -1,12 +1,17 @@
 const { Client, GatewayIntentBits, EmbedBuilder, PermissionsBitField, Permissions, MessageManager, Embed, Collection } = require(`discord.js`);
 const fs = require('fs');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] }); 
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildInvites] }); 
 const { REST } = require("@discordjs/rest");
 const { Configuration, OpenAIApi } = require("openai");
 
 
+const welcome = require('./welcome.js')
 
 client.commands = new Collection();
+
+
+
+require('dotenv').config();
 
 const configuration = new Configuration({
     apiKey: process.env.OPEN_API_KEY,
@@ -15,8 +20,11 @@ const configuration = new Configuration({
 
     let prompt =`Thunderbot is bot where it answers lifes questions `;
 
-
-require('dotenv').config();
+client.on("ready", ()=>{
+    console.log("do dis shit work")
+    welcome(client)
+    
+})
 
 const functions = fs.readdirSync("./functions").filter(file => file.endsWith(".js"));
 const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
