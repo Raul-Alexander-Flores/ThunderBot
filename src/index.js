@@ -9,7 +9,7 @@ const welcome = require('./welcome.js')
 
 client.commands = new Collection();
 
-
+const prefix = '>';
 
 require('dotenv').config();
 
@@ -18,7 +18,10 @@ const configuration = new Configuration({
   });
   const openai = new OpenAIApi(configuration);
 
-    let prompt =`Thunderbot is bot where it answers lifes questions `;
+    let prompt =`is bot that is lazy and doesnt like to play Genshin Impact. He likes anime.
+
+     You:
+    `;
 
 client.on("ready", ()=>{
     console.log("do dis shit work")
@@ -35,8 +38,13 @@ const commandFolders = fs.readdirSync("./commands");
 
 
 // GPT 3 
-/* client.on("messageCreate", function (message) {
-    if (message.author.bot) return;
+
+
+
+
+
+ client.on("messageCreate", function (message) {
+    if(!message.content.startsWith(prefix) || message.author.bot) return;
     prompt += `You: ${message.content}\n`;
    (async () => {
          const gptResponse = await openai.createCompletion({
@@ -53,7 +61,8 @@ const commandFolders = fs.readdirSync("./commands");
          prompt += `${gptResponse.data.choices[0].text}\n`;
      })();
  }); 
- */
+ 
+
 (async () => {
     for (file of functions) {
         require(`./functions/${file}`)(client);
