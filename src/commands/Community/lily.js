@@ -1,7 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require("@discordjs/rest");
-require('dotenv').config();
-
 
 
 
@@ -10,9 +8,9 @@ module.exports = {
     .setName('lily')
     .setDescription('Wheres my money'),
 
-    async execute(interation, client){
+    async execute(interaction, client){
         await interation.reply({ content: ` The bot is working `, ephemeral: true})
-        await interation.channel.send('Wheres my welkin Lily')
+        await interaction.channel.send('Wheres my welkin Lily')
     },
 }
 

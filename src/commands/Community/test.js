@@ -10,9 +10,9 @@ module.exports = {
     .setName('renzal')
     .setDescription('Wheres my money'),
 
-    async execute(interation, client){
-        await interation.reply({ content: ` The bot is working `, ephemeral: true})
-        await interation.channel.send('Wheres my welkin Renzal')
+    async execute(interaction, client){
+        await interaction.reply({ content: ` The bot is working `, ephemeral: true})
+        await interaction.channel.send('Wheres my welkin Renzal')
     },
 }
 
