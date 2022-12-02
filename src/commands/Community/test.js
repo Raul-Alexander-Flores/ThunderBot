@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require("@discordjs/rest");
-require('dotenv').config();
 
 
 

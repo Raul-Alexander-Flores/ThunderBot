@@ -53,27 +53,27 @@ module.exports ={
             if(i.guild.members.me.roles.highest.position < role1.position ){
 
                 // Add embeds [], components: []   instead of ephemeral for reaction order being shut down
-                i.update({ content: " My role is below the roles that I'm tying to give; I have shut this reaction message down", ephemeral: true})
+                i.update({ content: " My role is below the roles that I'm tying to give; I have shut this reaction message down", embeds:[], components: []})
                 return;
             } else if (i.guild.members.me.roles.highest.position < role2.position ){
-                i.update({ content: " My role is below the roles that I'm tying to give; I have shut this reaction message down", ephemeral: true})
+                i.update({ content: " My role is below the roles that I'm tying to give; I have shut this reaction message down", embeds:[], components: []})
                 return;
             } else if (i.guild.members.me.roles.highest.position < role3.position ){
-                i.update({ content: " My role is below the roles that I'm tying to give; I have shut this reaction message down", ephemeral: true})
+                i.update({ content: " My role is below the roles that I'm tying to give; I have shut this reaction message down", embeds:[], components: []})
                 return;
             } 
 
             if ( i.customId === 'button1'){
                 member.roles.add(role1);
-                i.reply({content: `You now have the role: ${role1.name}`, ephemeral: true})
+                i.reply({content: `You now have the role: ${role1.name}`, ephemeral: []})
             }
             if ( i.customId === 'button2'){
                 member.roles.add(role2);
-                i.reply({content: `You now have the role: ${role2.name}`, ephemeral: true})
+                i.reply({content: `You now have the role: ${role2.name}`, ephemeral: []})
             }
             if ( i.customId === 'button3'){
                 member.roles.add(role3);
-                i.reply({content: `You now have the role: ${role3.name}`, ephemeral: true})
+                i.reply({content: `You now have the role: ${role3.name}`, ephemeral: []})
             }
         })
 
