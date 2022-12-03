@@ -30,10 +30,7 @@ const configuration = new Configuration({
   });
   const openai = new OpenAIApi(configuration);
 
-    let prompt =`is bot that is lazy and doesnt like to play Genshin Impact. He likes anime.
-
-     You:
-    `;
+    let prompt =` `;
 
  client.on("messageCreate", function (message) {
     if(!message.content.startsWith(prefix) || message.author.bot) return;
@@ -43,13 +40,13 @@ const configuration = new Configuration({
             // console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
              model: "text-davinci-002",
              prompt: prompt,
-             max_tokens: 60,
+             max_tokens: 90,
              temperature: 0.9,
              top_p: 0.3,
              presence_penalty: 0,
              frequency_penalty: 0.5,
            });
-         message.reply(`${gptResponse.data.choices[0].text.substring()}`);
+         message.reply(`${gptResponse.data.choices[0].text.substring(5)}`);
          prompt += `${gptResponse.data.choices[0].text}\n`;
      })();
  }); 

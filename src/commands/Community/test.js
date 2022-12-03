@@ -6,12 +6,12 @@ const { REST } = require("@discordjs/rest");
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('renzal')
-    .setDescription('Wheres my money'),
+    .setName('test')
+    .setDescription('Checks if the bot is working'),
 
     async execute(interaction, client){
-        await interaction.reply({ content: ` The bot is working `, ephemeral: true})
-        await interaction.channel.send('Wheres my welkin Renzal')
+        await interaction.reply({ content: `The bot is working`, ephemeral: true})
+        await interaction.channel.send('The Bot is working')
     },
 }
 
