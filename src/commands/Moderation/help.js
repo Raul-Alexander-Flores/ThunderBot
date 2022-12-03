@@ -24,9 +24,7 @@ module.exports = {
         .setTitle('Community Commands')
         .addFields({ name: '/help', value: 'Do /help for the command list & support'})
         .addFields({ name: '/test', value: 'Check is bot is working'})
-
-        // Need to work on 
-        .addFields({ name: '/steal', value: 'Steal an emoji (Not Working Right now)'})
+        .addFields({ name: '/steal', value: 'Steal an emoji'})
 
     
         .setTimestamp()
