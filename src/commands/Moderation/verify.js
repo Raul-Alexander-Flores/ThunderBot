@@ -7,7 +7,7 @@ module.exports ={
     async execute (interaction, client){
 
         const role = interaction.guild.roles.cache.find(r => r.name === 'Verified')
-
+        console.log(role)
         const member = interaction.member;
 
         member.roles.add(role);

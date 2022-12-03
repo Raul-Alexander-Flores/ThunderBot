@@ -35,6 +35,9 @@ module.exports = {
         const role = interaction.guild.roles.cache.find( r => r.name === "Verified");
 
         const member = i.member;
+        console.log("**************" ,member)
+        console.log("**************" ,member.roles)
+        
 
         member.roles.add(role);
 

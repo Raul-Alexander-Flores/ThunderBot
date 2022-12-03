@@ -13,6 +13,18 @@ const prefix = '>';
 
 require('dotenv').config();
 
+
+
+const functions = fs.readdirSync("./functions").filter(file => file.endsWith(".js"));
+const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+const commandFolders = fs.readdirSync("./commands");
+
+
+/////////////------- GPT 3 --------//////////////////
+
+
+
+
 const configuration = new Configuration({
     apiKey: process.env.OPEN_API_KEY,
   });
@@ -22,26 +34,6 @@ const configuration = new Configuration({
 
      You:
     `;
-
-client.on("ready", ()=>{
-    console.log("do dis shit work")
-    welcome(client)
-    
-})
-
-
-
-
-const functions = fs.readdirSync("./functions").filter(file => file.endsWith(".js"));
-const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
-const commandFolders = fs.readdirSync("./commands");
-
-
-// GPT 3 
-
-
-
-
 
  client.on("messageCreate", function (message) {
     if(!message.content.startsWith(prefix) || message.author.bot) return;
