@@ -14,11 +14,11 @@ module.exports = {
         const amount = interaction.options.getInteger('amount');
         const channel = interaction.channel;
 
-        if(!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return await interaction.reply({ content: " You must have admin perms to create a react role message ", ephemeral: true})
+        if(!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return await interaction.reply({ content: "You must have admin permissions to clear messages", ephemeral: true})
         
-        if(!amount) return await interaction.reply({ content: "Pleae specify the amount of messages you want to delete", ephemeral: true})
+        if(!amount) return await interaction.reply({ content: "Please specify the amount of messages you want to delete", ephemeral: true})
 
-        if(amount > 100 || amount < 1 ) return await interaction.reply({ content: " Please select a number btween 1 and 100", ephemeral})
+        if(amount < 1 || amount > 100) return await interaction.reply({ content: " Please select a number btween 1 and 100", ephemeral: true})
 
 
         await interaction.channel.bulkDelete(amount).catch(err =>{

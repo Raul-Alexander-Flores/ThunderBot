@@ -16,7 +16,7 @@ const configuration = new Configuration({
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('aibot')
+    .setName('thunderbot')
     .setDescription('Talk to the AI BOT')
     .addStringOption(option => option.setName(`prompt`).setDescription(`Enter a prompt`).setRequired(true)),
 
@@ -24,9 +24,8 @@ module.exports = {
     async execute(interaction, client){
 
         const prompt2 = interaction.options.getString(`prompt`);
-        console.log(prompt2)
 
-        let prompt =`Thunderbot is a chatbot that is helpful to whoever is asking. Replies in first person. `
+        let prompt =`Thunderbot is a chatbot that is helpful to whoever is asking. Replies in first person. Do not include Bot:  `
         prompt += `You: ${prompt2}\n`;
        (async () => {
              const gptResponse = await openai.createCompletion({
@@ -39,11 +38,12 @@ module.exports = {
                  frequency_penalty: 0.5,
                });
                prompt += `${gptResponse.data.choices[0].text}\n`;
-               console.log(`${gptResponse.data.choices[0].text.substring()}`)
-               await interaction.channel.send(`${gptResponse.data.choices[0].text.substring()}`);
-            })().catch(err =>{
-                return
-         })
+               
+               await interaction.channel.send({content: `${gptResponse.data.choices[0].text.substring()}`, ephemeral: true});
+              })().catch(err =>{
+                return;
+              })
+              await interaction.reply({ content: `Response loading`, ephemeral: true})
 
 
     },

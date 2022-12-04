@@ -13,9 +13,9 @@ module.exports = {
         .setColor('Blue')
         .setTitle('Help Center')
         .setDescription(`Help Command Guide:`)
-        .addFields({ name: 'Page 1', value: 'Help and Resources (button1)'})
-        .addFields({ name: 'Page 2', value: 'Community Commands (button2)'})
-        .addFields({ name: 'Page 3', value: 'Moderation Commands (button3)'})
+        .addFields({ name: 'Page 1', value: 'Help and Resources (button 1)'})
+        .addFields({ name: 'Page 2', value: 'Community Commands (button 2)'})
+        .addFields({ name: 'Page 3', value: 'Moderation Commands (button 3)'})
 
 
 
@@ -25,6 +25,9 @@ module.exports = {
         .addFields({ name: '/help', value: 'Do /help for the command list & support'})
         .addFields({ name: '/test', value: 'Check is bot is working'})
         .addFields({ name: '/steal', value: 'Steal an emoji'})
+        .addFields({ name: '/thunderbot', value: 'Speak with the AI chat bot'})
+        .addFields({ name: '/image', value: 'Generate an AI iamge'})
+
 
     
         .setTimestamp()

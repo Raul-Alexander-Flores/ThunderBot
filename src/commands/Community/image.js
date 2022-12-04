@@ -35,6 +35,8 @@ module.exports = {
             })().catch(err =>{
                 return
          })
+         await interaction.reply({ content: `Image being generated`, ephemeral: true})
+
     },
     }
 
