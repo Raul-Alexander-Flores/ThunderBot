@@ -1,4 +1,4 @@
-/* 
+
 const configuration = new Configuration({
     apiKey: process.env.OPEN_API_KEY,
   });
@@ -20,4 +20,3 @@ const configuration = new Configuration({
      })();
  }); 
   
- */
