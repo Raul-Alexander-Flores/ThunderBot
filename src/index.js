@@ -41,7 +41,9 @@ client.on("interactionCreate", async (interaction) => {
       const queue = player.createQueue(interaction.guild, {
           metadata: {
               channel: interaction.channel,
-              autoSelfDeaf: false
+              autoSelfDeaf: false,
+              voiceChannel: true,
+
           }
         });
       
