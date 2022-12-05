@@ -71,16 +71,16 @@ client.on("interactionCreate", async (interaction) => {
 
 
       
-      queue.play(track)
+    
+    if (!track) return await interaction.followUp({ content: `❌ | Track **${query}** not found!` });
+    console.log( " *************************QUEUE**************************", queue)
+    
+    queue.play(track)
 
-      if (!track) return await interaction.followUp({ content: `❌ | Track **${query}** not found!` });
-      console.log( " *************************QUEUE**************************", queue)
-
-
-      console.log("************END*************")  
+    console.log("************END*************")  
       
-      player.on("error", (queue, error) => {
-        console.log(`Error at ${queue.guild.id} | ${error.message}`);
+    player.on("error", (queue, error) => {
+      console.log(`${error.message}`);
     });
       return await interaction.followUp({ content: `⏱️ | Loading track **${track.title}**!` });
 
