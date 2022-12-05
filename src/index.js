@@ -58,17 +58,34 @@ client.on("interactionCreate", async (interaction) => {
       }
 
       await interaction.deferReply();
+
+
       const track = await player.search(query, {
           requestedBy: interaction.user
       }).then(x => x.tracks[0]);
+
+      console.log("************TRACK*************", track)
+    ;
+
+
+
+
+      
+      queue.play(track)
+
       if (!track) return await interaction.followUp({ content: `❌ | Track **${query}** not found!` });
+      console.log( " *************************QUEUE**************************", queue)
 
-      queue.play(track).catch(err =>{
-        console.log(err)
-      });
 
+      console.log("************END*************")  
+      
+      player.on("error", (queue, error) => {
+        console.log(`Error at ${queue.guild.id} | ${error.message}`);
+    });
       return await interaction.followUp({ content: `⏱️ | Loading track **${track.title}**!` });
+
   } 
+    
 });
 
 
