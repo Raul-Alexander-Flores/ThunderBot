@@ -186,6 +186,8 @@ client.on(Events.InteractionCreate, async interaction =>{
   if(interaction.customId === 'modal'){
     await interaction.reply({ content: 'Your modal has been submitted', ephemeral: true})
   }
+  
+
 
   const name = interaction.fields.getTextInputValue('name');
   const about = interaction.fields.getTextInputValue('about');
