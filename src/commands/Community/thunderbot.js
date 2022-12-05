@@ -39,11 +39,11 @@ module.exports = {
                });
                prompt += `${gptResponse.data.choices[0].text}\n`;
                
-               await interaction.channel.send({content: `${gptResponse.data.choices[0].text.substring()}`, ephemeral: true});
+               await interaction.channel.send({content: `${gptResponse.data.choices[0].text.substring()}`, ephemeral: false});
               })().catch(err =>{
                 return;
               })
-              await interaction.reply({ content: `Response loading`, ephemeral: true})
+              await interaction.reply({ content: `Loading...`})
 
 
     },

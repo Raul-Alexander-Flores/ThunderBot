@@ -10,17 +10,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.8.0",
     "@discordjs/rest": "^1.4.0",
     "axios": "^1.2.0",
     "better-sqlite3": "^8.0.0",
+    "discord-player": "^5.3.2",
     "discord.js": "^14.7.0",
     "discord.js-commando": "^0.12.3",
     "dotenv": "^16.0.3",
+    "enka-network-api": "^1.6.11",
+    "ffmpeg-static": "^5.1.0",
     "needle": "^3.2.0",
     "openai": "^3.1.0",
     "qs": "^6.11.0",
     "quick.db": "^9.0.6",
+    "tmi.js": "^1.8.5",
     "twitter-api-sdk": "^1.2.1",
-    "twitter-v2": "^1.1.0"
+    "twitter-v2": "^1.1.0",
+    "ytdl-core": "^4.11.2"
   }
 }

@@ -1,14 +1,17 @@
 const { Client, GatewayIntentBits, EmbedBuilder, PermissionsBitField, Permissions, MessageManager, Embed, Collection } = require(`discord.js`);
 const fs = require('fs');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildInvites, GatewayIntentBits.GuildPresences] }); 
+const ytdl = require('ytdl-core');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildInvites, GatewayIntentBits.GuildPresences] }); 
 const { REST } = require("@discordjs/rest");
 const Twit = require('twitter-v2')
-
-
+const welcome = require('./events/welcome.js')
+const gpt3 = require('./GPT3/gpt3text.js')
+const { Player } = require("discord-player");
 
 require('dotenv').config();
-const gpt3 = require('./GPT3/gpt3text.js')
-const welcome = require('./events/welcome.js')
+
+
+
 
 client.on("ready", () => {
     gpt3(client)
@@ -19,8 +22,55 @@ client.on("ready", () => {
 client.commands = new Collection();
 
 
+// ********************* Discord JS Player ************************
 
-// **************************************** TWITTER ******************************
+
+const player = new Player(client);
+
+player.on("trackStart", (queue, track) => queue.metadata.channel.send(`🎶 | Now playing **${track.title}**!`))
+
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
+
+  // /play track:Despacito
+  // will play "Despacito" in the voice channel
+  if (interaction.commandName === "play") {
+      if (!interaction.member.voice.channelId) return await interaction.reply({ content: "You are not in a voice channel!", ephemeral: true });
+      if (interaction.guild.members.me.voice.channelId && interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId) return await interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
+      const query = interaction.options.getString("query");
+      const queue = player.createQueue(interaction.guild, {
+          metadata: {
+              channel: interaction.channel,
+              autoSelfDeaf: false
+          }
+        });
+      
+     // await queue.connect(interaction.member.voice.channel)
+      // verify vc connection
+      try {
+          if (!queue.connection) await queue.connect(interaction.member.voice.channel);
+      } catch {
+          queue.clear()
+          queue.destroy();
+          return await interaction.reply({ content: "Could not join your voice channel!", ephemeral: true });
+      }
+
+      await interaction.deferReply();
+      const track = await player.search(query, {
+          requestedBy: interaction.user
+      }).then(x => x.tracks[0]);
+      if (!track) return await interaction.followUp({ content: `❌ | Track **${query}** not found!` });
+
+      queue.play(track).catch(err =>{
+        console.log(err)
+      });
+
+      return await interaction.followUp({ content: `⏱️ | Loading track **${track.title}**!` });
+  } 
+});
+
+
+// ************************* TWITTER ******************************
 
 
 let twitterChannel = "HebeCelene";
@@ -92,10 +142,14 @@ client.on("message", message => {
   }
 });
 
+// ********************* EVENTS AND COMMANDS ************************
+
+
+
+
 const functions = fs.readdirSync("./functions").filter(file => file.endsWith(".js"));
 const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
 const commandFolders = fs.readdirSync("./commands");
-
 
 
 (async () => {
