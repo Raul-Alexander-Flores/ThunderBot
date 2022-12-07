@@ -3,9 +3,9 @@ const fs = require('fs');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildInvites, GatewayIntentBits.GuildPresences] }); 
 const { REST } = require("@discordjs/rest");
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const TwitchApi = require("node-twitch").default;
+
 require('dotenv').config();
-const Discord = require('discord.js');
-const tmi = require('tmi.js');
 
 module.exports ={
     data: new SlashCommandBuilder()
@@ -14,23 +14,34 @@ module.exports ={
 
     async execute (interaction, client){
 
+        const twitch = new TwitchApi({
+            client_id: process.env.TWITCH_CLIENT_ID,
+            client_secret: process.env.TWITCH_KEY_SECRET
 
-    const twitch = new tmi.Client({
-    connection: {
-        secure: true,
-        reconnect: true,
-    },
-    identity: {
-        username: 'process.env.YOUR_TWITCH_USERNAME',
-        password: 'process.env.YOUR_TWITCH_PASSWORD',
-    },
-    channels: ['process.env.YOUR_TWITCH_CHANNEL'],
-    });
+        })
 
-  twitch.connect();
-  twitch.on('stream-online', async (channel, tags) => {
-    await interaction.reply({ content: `Image being generated`, ephemeral: true})
-}).catch(err =>{
-    return
-})
-}}
+
+        async function getStream(){
+            const streams = await twitch.getStreams({ channel: "Asmongold" });
+            const stream = streams.data[0].user_name;
+            const streamID = streams.data[0]?.id;
+            
+            
+            const message2 = 'Hmmge'
+            const message = `${stream} `
+        
+        
+            if (streamID === undefined ){
+              console.log('no stream today')
+            }else(
+              //console.log(message),
+             //console.log(message2)
+              console.log('stream_on')
+            )
+            await interaction.reply({ content: `${stream}`, ephemeral: false})
+          }
+        
+          getStream();
+            
+    }
+}

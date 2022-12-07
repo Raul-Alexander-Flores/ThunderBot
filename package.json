@@ -12,6 +12,7 @@
   "dependencies": {
     "@discordjs/opus": "^0.8.0",
     "@discordjs/rest": "^1.4.0",
+    "@pipedream/platform": "^1.2.1",
     "axios": "^1.2.0",
     "better-sqlite3": "^8.0.0",
     "discord-player": "^5.3.2",
@@ -21,6 +22,7 @@
     "enka-network-api": "^1.6.11",
     "ffmpeg-static": "^5.1.0",
     "needle": "^3.2.0",
+    "node-twitch": "^0.5.0",
     "openai": "^3.1.0",
     "qs": "^6.11.0",
     "quick.db": "^9.0.6",
