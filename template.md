@@ -34,6 +34,7 @@ module.exports = {
 - [ ] Twitch - Set to channels, need to add more 
 - [ ] verified - Need to add final confirmation of modal to verify 2 
 - [ ] youtube - uhh somehow downloads youtube video no audio
+- [x] 9anime general search
 
 ### Moderation
 - [x] Add Role
