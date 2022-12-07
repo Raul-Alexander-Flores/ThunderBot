@@ -13,7 +13,7 @@ require('dotenv').config();
 
 client.on("ready", () => {
     gpt3(client)
-    welcome(client)
+    // welcome(client)
     dplayer(client)
     })
 
@@ -55,3 +55,21 @@ client.on(Events.InteractionCreate, async interaction =>{
   console.log(`Name:${name} \nAbout the person: ${about}\nSubmitted by: ${member}`)
 })
 
+
+// ********************* Welcome ************************
+
+
+const { QuickDB } = require(`quick.db`);
+const db = new QuickDB();
+
+client.on(Events.GuildMemberAdd, async (member) =>{
+
+  const channelID = await db.get(`welchannel_${member.guild.id}`)
+  const channel = member.guild.channels.cache.get(channelID)
+  const message = `Welcome to the server, ${member}`
+
+  if (channelID == null) return;
+
+  channel.send(message)
+
+}) 
