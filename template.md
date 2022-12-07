@@ -52,5 +52,7 @@ module.exports = {
 - [x] Warn
 - [x] Warnings
 - [x] Untimeout
+- [x] Set Welcome Channel
+- [x] Remove Welcome Channel
 
 
