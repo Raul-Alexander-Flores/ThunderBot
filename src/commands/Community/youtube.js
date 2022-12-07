@@ -14,14 +14,8 @@ module.exports ={
             
             youtube =  interaction.options.getString("youtube");
 
-
             ytdl(`${youtube}`)
                     .pipe(fs.createWriteStream('video.mp4'));
-
-   
-        
-    
     }
     
-  
   };
