@@ -73,3 +73,62 @@ client.on(Events.GuildMemberAdd, async (member) =>{
   channel.send(message)
 
 }) 
+
+
+
+
+  const twitch = new TwitchApi({
+      client_id: process.env.TWITCH_CLIENT_ID,
+      client_secret: process.env.TWITCH_KEY_SECRET
+ 
+  })
+ 
+ 
+  /* const run = async function getStream(){
+      const streams = await twitch.getStreams({ channel: "Asmongold" });
+      const stream = streams.data[0].user_name;
+      const streamID = streams.data[0]?.id;
+      
+  
+      if (streamID === undefined ){
+        console.log('no stream today')
+      }else(
+        console.log('stream_on')
+      )
+      
+    }
+    
+  setInterval(run, 2000); */
+
+
+    
+  const run = async function Run() {
+    await twitch.getStreams({ channel: "Asmongold" })
+        .then(async data => {
+        const r = data.data[0]
+        // console.log(data.data[0])
+        let ThisGuildOnly = client.guilds.cache.get("893188928184676352")
+        const ChannelAnnounceLive = ThisGuildOnly.channels.cache.find(x => x.id === "1049807567645331618")
+        let IsLiveMemory = false
+        if (r !== undefined) {
+            if (r.type === "live") {
+                if (IsLiveMemory === false || IsLiveMemory === undefined) {
+                    IsLiveMemory = true
+                    ChannelAnnounceLive.send(` @everyone https://www.twitch.tv/${r.user_name} is now **LIVE**`)
+                } else if (IsLiveMemory === true) {
+                } else {}
+            } else {
+                if (IsLiveMemory === true) {
+                    IsLiveMemory = false
+                } else {}
+            }
+        } else {
+            if (IsLiveMemory === true) {
+                IsLiveMemory = false
+            } else {
+            }
+        }
+      })
+  }
+  setInterval(
+      run, 200000)
