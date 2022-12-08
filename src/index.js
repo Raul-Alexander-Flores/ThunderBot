@@ -6,6 +6,8 @@ const welcome = require('./events/welcome.js')
 const gpt3 = require('./GPT3/gpt3text.js')
 const dplayer = require('./events/discordplayer.js');
 const TwitchApi = require("node-twitch").default;
+const Twitter = require('twitter');
+
 require('dotenv').config();
 
 
@@ -74,6 +76,7 @@ client.on(Events.GuildMemberAdd, async (member) =>{
 
 }) 
 
+// ********************* TWITCH ************************
 
 
 
@@ -84,23 +87,6 @@ client.on(Events.GuildMemberAdd, async (member) =>{
   })
  
  
-  /* const run = async function getStream(){
-      const streams = await twitch.getStreams({ channel: "Asmongold" });
-      const stream = streams.data[0].user_name;
-      const streamID = streams.data[0]?.id;
-      
-  
-      if (streamID === undefined ){
-        console.log('no stream today')
-      }else(
-        console.log('stream_on')
-      )
-      
-    }
-    
-  setInterval(run, 2000); */
-
-
     
   const run = async function Run() {
     await twitch.getStreams({ channel: "Asmongold" })
@@ -114,7 +100,7 @@ client.on(Events.GuildMemberAdd, async (member) =>{
             if (r.type === "live") {
                 if (IsLiveMemory === false || IsLiveMemory === undefined) {
                     IsLiveMemory = true
-                    ChannelAnnounceLive.send(` @everyone https://www.twitch.tv/${r.user_name} is now **LIVE**`)
+                    ChannelAnnounceLive.send(`@Twitch https://www.twitch.tv/${r.user_name} is now **LIVE**`)
                 } else if (IsLiveMemory === true) {
                 } else {}
             } else {
@@ -131,4 +117,5 @@ client.on(Events.GuildMemberAdd, async (member) =>{
       })
   }
   setInterval(
-      run, 200000)
+      run, 900000)
+

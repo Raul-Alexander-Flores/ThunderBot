@@ -4,7 +4,7 @@ const T = new Twit({
     consumer_key: process.env.TWITTER_API,
     consumer_secret: process.env.TWITTER_API_SECRET,
     access_token: process.env.ACCESS_TOKEN,
-    access_token_secret: process.env.ACCESS_TOKEN_SECRET
+    access_token_secret: process.env.ACCESS_TOKEN_SECRET,
   });
 
 
@@ -17,7 +17,7 @@ const T = new Twit({
     console.log(twitterChannel, twitterID, twitterUser)
 
     const channelID = '1048983473009983498';
-  
+
 
     twitterChannel = client.channels.cache.get(channelID);
     // console.log(twitterChannel.id);
@@ -55,6 +55,10 @@ const T = new Twit({
           // filter_level: "low"
         });
   
+
+
+
+
         stream.on("tweet", tweet => {
           if (tweet.user.id_str === twitterID) {
             console.log(tweet);

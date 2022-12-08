@@ -27,6 +27,7 @@
     "qs": "^6.11.0",
     "quick.db": "^9.0.6",
     "tmi.js": "^1.8.5",
+    "twitter": "^1.7.1",
     "twitter-api-sdk": "^1.2.1",
     "twitter-v2": "^1.1.0",
     "ytdl-core": "^4.11.2"
